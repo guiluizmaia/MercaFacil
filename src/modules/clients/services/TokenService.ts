@@ -12,9 +12,9 @@ class TokenService{
     public async execute({client}: IRequest): Promise<String> {
         let secretKey;
 
-        if (client === "MACAPA"){
+        if (client.toUpperCase() === "MACAPA"){
             secretKey = process.env.SECRETMACAPA;
-        } else if (client === "VAREJAO"){
+        } else if (client.toUpperCase() === "VAREJAO"){
             secretKey = process.env.SECRETVAREJAO;
         } else {
             throw new AppError("Client not found", 401);

@@ -16,9 +16,8 @@ export class CreateTableContacts1654534218640 implements MigrationInterface {
                 columns: [
                   {
                     name: "id",
-                    type: "uuid",
+                    type: "varchar",
                     generationStrategy: "uuid",
-                    default: "uuid_generate_v4()",
                     isPrimary: true,
                   },
                   {
@@ -46,6 +45,7 @@ export class CreateTableContacts1654534218640 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+      await queryRunner.dropTable("contacts");
     }
 
 }
