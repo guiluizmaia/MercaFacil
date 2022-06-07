@@ -4,6 +4,7 @@ import http, { Server } from 'http';
 import cors from 'cors';
 import appRoutes from './routes';
 import AppError from './errors/AppError';
+import { errors } from 'celebrate';
 
 class App {
   private app: Express;
@@ -15,6 +16,7 @@ class App {
 
     this.middlewares();
     this.routes();
+    this.handleParseErrors();
     this.error();
   }
 
@@ -46,6 +48,14 @@ class App {
           messsage: `Internal server error: ${err.message}`,
         });
       },
+    );
+  }
+
+  private handleParseErrors() {
+    this.app.use(
+      errors({
+        statusCode: 422,
+      }),
     );
   }
 
