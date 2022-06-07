@@ -25,7 +25,7 @@ class AuthenticateService{
             throw new AppError('Email or password not correct!', 401);
         }
 
-        const passwordMatch = compare(String(pass), String(client.pass));
+        const passwordMatch = await compare(String(pass), String(client.pass));
 
         if (!passwordMatch) {
             throw new AppError('Email or password not correct!', 401);

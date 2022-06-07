@@ -1,5 +1,4 @@
 import AppError from '@infra/http/errors/AppError';
-import TokenService from '@modules/clients/services/TokenService';
 import CreateContactsService from '@modules/contacts/services/CreateContactsService';
 import ContactRepositoryMock from '@tests/mocks/ContactRepositoryMock';
 
