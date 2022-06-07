@@ -8,7 +8,7 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const v1Routes = Router();
 
-v1Routes.use('/token', clientsRoutes);
+v1Routes.use('/login', clientsRoutes);
 
 v1Routes.use(ensureAuthenticated)
 

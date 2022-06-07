@@ -32,30 +32,40 @@ Especificações do Cliente VareJão:
 
 A criação de um ambiente de testes usando Docker para simular o banco de dados do cliente é altamente recomendada. A solução poderá ser desenvolvida em Golang ou Node.js. Fique livre para desenhar a solução da maneira que achar mais conveniente e supor qualquer cenário que não foi abordado nas especificações acima. Se, por qualquer motivo, você não consiga completar este teste, recomendamos que nos encaminhe o que foi desenvolvido de qualquer maneira. A falta de cumprimento de alguns dos requisitos aqui descritos não implica necessariamente na desconsideração do candidato.
 
+## Testes Unitários
+
+Os testes unitários estão cobrindo 100% de toda a camada de regra de negócio (services)
+São feitos usando Jest
+
 ## Fluxo
 
 Para testar basta rodar
 
 `docker-compose up`
 
-Nesse processo iniciará dois bancos de dados (PostgreSQL e MySQL), rodara as migrations para a criação da tabela e subirá a aplicação.
+Nesse processo iniciará 3 bancos de dados (2 PostgreSQL e 1 MySQL), rodará as migrations para a criação da tabela e subirá a aplicação. A migration do banco de dados para autenticação cria dois clientes.
 
-Na criação supus que esse token é gerado em outro serviço, pensando nisso tem uma roda para retornar o token do cliente passado pelo query string da rota.
+Para autenticação usamos a rota de loign
 
 Exemplo:
 
-GET - `/token?client=macapa`
+POST - `/login`
+EXEMPLO DE BODY - <br />`{ "email": "test@macapa.com", "pass": "1234" }`
 
-Esse query string só pode ser macapa e varejao
-
-Com o token retornado se deve coloca-lo no authentication da rota seguinte
+O Email também pode ser `test@varejao.com`, essa rota retornará o token de autenticação
 
 POST - `/contacts`
 EXEMPLO DE BODY - <br />`{ "contacts": [ { "name": "Srta. Isabelly Castro", "cellphone": "5541959365078" }, { "name": "Ana Julia da Rocha", "cellphone": "5541923038062" }] }`
 
+Nessa rota se deve autenticar com o token recebido no login
+
 Rota para documentação:
 GET - `/api-doc/v1`
 
-## Possível melhoria
+A documentação é toda feita com swagger
 
-Tornar a requisição assincrona, como não há limites de quantos contatos podem ser enviados em uma só requisição, tornar ela assincrona seria uma boa estratégia. Poderia ser usado algum serviço de mensageria ao inves do REST, como por exemplo RabbitMQ. Ou até mesmo usar um sistema de fila ja pré pronto
+## Possíveis melhorias
+
+- Tornar a requisição assincrona, como não há limites de quantos contatos podem ser enviados em uma só requisição, tornar ela assincrona seria uma boa estratégia. Poderia ser usado algum serviço de mensageria ao inves do REST, como por exemplo RabbitMQ. Ou até mesmo usar um sistema de fila ja pré pronto
+
+- Adicionar Testes de ponta a ponta, para isso necessitaria de um banco de dados específicos para esses testes

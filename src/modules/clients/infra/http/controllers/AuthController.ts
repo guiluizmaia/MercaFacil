@@ -1,18 +1,18 @@
-import TokenService from '@modules/clients/services/TokenService';
+import AuthenticateService from '@modules/clients/services/AuthenticateService';
 import { Response, Request } from 'express';
 import { container } from 'tsyringe';
 
-class TokenController{
+class AuthController{
     public async execute(
         request: Request,
         response: Response,
     ): Promise<Response> {
-        const { client } = request.query;
+        const { email, pass } = request.body;
         
-        const token = await container.resolve(TokenService).execute({client: String(client)});
+        const token = await container.resolve(AuthenticateService).execute({email, pass});
     
         return response.status(200).json({token: token});
     }
 }
 
-export default TokenController;
+export default AuthController;

@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
-import TokenController from '../controllers/TokenController';
+import AuthController from '../controllers/AuthController';
 
 const clientsRoutes = Router();
 
-const tokenController = new TokenController();
+const authController = new AuthController();
 
-clientsRoutes.get('/', tokenController.execute);
+clientsRoutes.post('/', authController.execute);
 
 export default clientsRoutes;
