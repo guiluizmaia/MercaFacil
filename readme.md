@@ -32,6 +32,16 @@ Especificações do Cliente VareJão:
 
 A criação de um ambiente de testes usando Docker para simular o banco de dados do cliente é altamente recomendada. A solução poderá ser desenvolvida em Golang ou Node.js. Fique livre para desenhar a solução da maneira que achar mais conveniente e supor qualquer cenário que não foi abordado nas especificações acima. Se, por qualquer motivo, você não consiga completar este teste, recomendamos que nos encaminhe o que foi desenvolvido de qualquer maneira. A falta de cumprimento de alguns dos requisitos aqui descritos não implica necessariamente na desconsideração do candidato.
 
+## Bibliotecas
+
+- Celebrate: para validar os dados das requisições
+- Tsyringe: para injeção de dependência
+- Jest: para testes
+- Bcryptjs: para criar um hash da senha
+- Jsonwebtoken: para criar o token jwt
+- Typeorm: orm usado para conectar e usar os 3 bancos
+- Swagger: para documentação
+
 ## Testes Unitários
 
 Os testes unitários estão cobrindo 100% de toda a camada de regra de negócio (services)
@@ -43,7 +53,7 @@ Para testar basta rodar
 
 `docker-compose up`
 
-Nesse processo iniciará 3 bancos de dados (2 PostgreSQL e 1 MySQL), rodará as migrations para a criação da tabela e subirá a aplicação. A migration do banco de dados para autenticação cria dois clientes.
+Nesse processo iniciará 3 bancos de dados (2 PostgreSQL e 1 MySQL), rodará as migrations para a criação da tabela e subirá a aplicação. 1 Banco PostgreSQL é somente para a autenticação. A migration do banco de dados para autenticação cria dois clientes.
 
 Para autenticação usamos a rota de loign
 
