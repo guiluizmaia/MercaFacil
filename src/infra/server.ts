@@ -1,10 +1,9 @@
 import 'dotenv/config';
 import 'reflect-metadata';
-import App from './http/app';
+import '@infra/typeorm';
+import '@infra/container';
 
-//import '@lib/container';
-
-import './typeorm';
+import App from '@infra/http/app';
 
 
 const PORT = process.env.PORT || 3333;

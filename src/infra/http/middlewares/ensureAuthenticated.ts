@@ -47,7 +47,6 @@ export default async function ensureAuthenticated(
             String(process.env.SECRETVAREJAO),
         ) as ITokenDecodeProps;
       
-    
         req.client = "VAREJAO"
     
         next();

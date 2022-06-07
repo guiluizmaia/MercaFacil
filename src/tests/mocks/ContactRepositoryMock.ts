@@ -1,8 +1,8 @@
 import IContactDto from "@modules/contacts/dtos/IContactDto";
 import Contact from "@modules/contacts/infra/typeorm/entities/Contact";
-import IContactsRepository from "@modules/contacts/repositories/IContactsRepository";
+import IContactRepository from "@modules/contacts/repositories/IContactRepository";
 
-class ContactsRepositoryMock implements IContactsRepository{
+class ContactRepositoryMock implements IContactRepository{
     private inMemoryVarejao: Contact[] = [];
     private inMemoryMacapa: Contact[] = [];
 
@@ -30,3 +30,4 @@ class ContactsRepositoryMock implements IContactsRepository{
         return this.inMemoryMacapa;
     }
 }
+export default ContactRepositoryMock;

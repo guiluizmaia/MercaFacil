@@ -7,9 +7,9 @@ class TokenController{
         request: Request,
         response: Response,
     ): Promise<Response> {
-        const { client } = request.body;
+        const { client } = request.query;
         
-        const token = await container.resolve(TokenService).execute(client);
+        const token = await container.resolve(TokenService).execute({client: String(client)});
     
         return response.status(200).json(token);
     }

@@ -5,6 +5,6 @@ const clientsRoutes = Router();
 
 const tokenController = new TokenController();
 
-clientsRoutes.post('/', tokenController.execute);
+clientsRoutes.get('/', tokenController.execute);
 
 export default clientsRoutes;

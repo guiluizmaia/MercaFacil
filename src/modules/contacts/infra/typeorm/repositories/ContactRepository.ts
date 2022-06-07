@@ -1,5 +1,5 @@
 import IContactDto from "@modules/contacts/dtos/IContactDto";
-import IContactsRepository from "@modules/contacts/repositories/IContactsRepository"
+import IContactsRepository from "@modules/contacts/repositories/IContactRepository"
 import { getRepository, Repository } from "typeorm";
 import Contact from "../entities/Contact";
 
@@ -21,7 +21,14 @@ class ContactRepository implements IContactsRepository{
             .values(contacts)
             .execute();
 
-        return query.raw();
+        const createdIds = query.identifiers.map(identifier => {
+            return identifier.id;
+        })           
+
+        return this.ormRepositoryPostgreSql
+            .createQueryBuilder("contact")
+            .where("contact.id IN (:...createdIds)", {createdIds})
+            .getMany()
     }
 
     public async indexVarejao(): Promise<Contact[]> {
@@ -29,7 +36,21 @@ class ContactRepository implements IContactsRepository{
     }
 
     public async createMacapa(contacts: IContactDto[]): Promise<Contact[]> {
-        throw new Error("Method not implemented.");
+        const query = await this.ormRepositoryMySql
+            .createQueryBuilder()
+            .insert()
+            .into(Contact)
+            .values(contacts)
+            .execute();
+
+        const createdIds = query.identifiers.map(identifier => {
+            return identifier.id;
+        })  
+
+        return this.ormRepositoryMySql
+            .createQueryBuilder("contact")
+            .where("contact.id IN (:...createdIds)", {createdIds})
+            .getMany();
     }
 
     public async indexMacapa(): Promise<Contact[]> {

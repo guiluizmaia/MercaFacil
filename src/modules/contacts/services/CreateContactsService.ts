@@ -1,11 +1,12 @@
-import AppError from '@infra/http/errors/AppError';
 import { Response, Request } from 'express';
-import { sign } from 'jsonwebtoken';
+import AppError from '@infra/http/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import Contact from '../infra/typeorm/entities/Contact';
-import IContactsRepository from '../repositories/IContactsRepository';
+import IContactRepository from '../repositories/IContactRepository';
+import { v4 } from "uuid";
 
 interface contactConverted {
+    id: String;
     nome: String;
     celular: String;
 }
@@ -23,17 +24,20 @@ interface IRequest {
 @injectable()
 class CreateContactsService{
     constructor(
-        @inject("ContactsRepository")
-        private contactsRepository: IContactsRepository
+        @inject("ContactRepository")
+        private contactsRepository: IContactRepository
     ){}
+
     public async execute({contacts, client}: IRequest): Promise<Contact[]> {
         if (client === "MACAPA"){
             const contactsConverted = this
                 .clientMacapaRequestToClientMacapaConverted(contacts);
+
             return this.contactsRepository.createMacapa(contactsConverted);
         } else if (client === "VAREJAO"){
             const contactsConverted = this
                 .clientVarejaoRequestToClientVarejaoConverted(contacts);
+
             return this.contactsRepository.createVarejao(contactsConverted);
         }
         
@@ -48,6 +52,7 @@ class CreateContactsService{
             const final = client.cellphone.slice(client.cellphone.length - 4)
 
             return {
+                id: v4(),
                 nome: client.name.toUpperCase(),
                 celular: `${prefix} ${ddd} ${init}-${final}`
             }
@@ -57,6 +62,7 @@ class CreateContactsService{
     private clientVarejaoRequestToClientVarejaoConverted(clients: contact[]): contactConverted[]{
         return clients.map(client => {
             return {
+                id: v4(),
                 nome: client.name,
                 celular: client.cellphone.replace(/[^\d]+/g,'')
             }

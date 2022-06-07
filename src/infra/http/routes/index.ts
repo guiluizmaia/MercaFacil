@@ -20,7 +20,7 @@ appRoutes.get('/health-check', async (req, res) => {
         databasePostgre = true
     }
   
-    if(!mysqlConnect){
+    if(mysqlConnect){
         databaseMySql = true
     }
     
