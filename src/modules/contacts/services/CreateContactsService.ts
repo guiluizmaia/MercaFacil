@@ -3,7 +3,7 @@ import AppError from '@infra/http/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import Contact from '../infra/typeorm/entities/Contact';
 import IContactRepository from '../repositories/IContactRepository';
-import { v4 } from "uuid";
+import { v4 } from 'uuid';
 
 interface contactConverted {
     id: String;
@@ -24,24 +24,24 @@ interface IRequest {
 @injectable()
 class CreateContactsService{
     constructor(
-        @inject("ContactRepository")
+        @inject('ContactRepository')
         private contactsRepository: IContactRepository
     ){}
 
     public async execute({contacts, client}: IRequest): Promise<Contact[]> {
-        if (client === "MACAPA"){
+        if (client === 'MACAPA'){
             const contactsConverted = this
                 .clientMacapaRequestToClientMacapaConverted(contacts);
 
             return this.contactsRepository.createMacapa(contactsConverted);
-        } else if (client === "VAREJAO"){
+        } else if (client === 'VAREJAO'){
             const contactsConverted = this
                 .clientVarejaoRequestToClientVarejaoConverted(contacts);
 
             return this.contactsRepository.createVarejao(contactsConverted);
         }
         
-        throw new AppError("Client is wrong", 401);
+        throw new AppError('Client is wrong', 401);
     }
 
     private clientMacapaRequestToClientMacapaConverted(clients: contact[]): contactConverted[]{

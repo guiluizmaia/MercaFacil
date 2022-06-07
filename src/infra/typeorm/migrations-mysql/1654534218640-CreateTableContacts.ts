@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from 'typeorm';
 
 export class CreateTableContacts1654534218640 implements MigrationInterface {
 
@@ -12,31 +12,31 @@ export class CreateTableContacts1654534218640 implements MigrationInterface {
         if (tableExists.length === 0) {
             await queryRunner.createTable(
               new Table({
-                name: "contacts",
+                name: 'contacts',
                 columns: [
                   {
-                    name: "id",
-                    type: "varchar",
-                    generationStrategy: "uuid",
+                    name: 'id',
+                    type: 'varchar',
+                    generationStrategy: 'uuid',
                     isPrimary: true,
                   },
                   {
-                    name: "nome",
-                    type: "varchar",
+                    name: 'nome',
+                    type: 'varchar',
                   },
                   {
-                    name: "celular",
-                    type: "varchar",
+                    name: 'celular',
+                    type: 'varchar',
                   },
                   {
-                    name: "created_at",
-                    type: "timestamp",
-                    default: "now()",
+                    name: 'created_at',
+                    type: 'timestamp',
+                    default: 'now()',
                   },
                   {
-                    name: "updated_at",
-                    type: "timestamp",
-                    default: "now()",
+                    name: 'updated_at',
+                    type: 'timestamp',
+                    default: 'now()',
                   },
                 ],
               })
@@ -45,7 +45,7 @@ export class CreateTableContacts1654534218640 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropTable("contacts");
+      await queryRunner.dropTable('contacts');
     }
 
 }

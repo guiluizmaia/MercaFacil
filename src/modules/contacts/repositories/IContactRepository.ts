@@ -1,5 +1,5 @@
-import IContactDto from "../dtos/IContactDto";
-import Clients from "../infra/typeorm/entities/Contact";
+import IContactDto from '../dtos/IContactDto';
+import Clients from '../infra/typeorm/entities/Contact';
 
 interface IContactRepository{
     createVarejao(contacts: IContactDto[]): Promise<Clients[]>;

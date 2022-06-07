@@ -11,7 +11,7 @@ class TokenController{
         
         const token = await container.resolve(TokenService).execute({client: String(client)});
     
-        return response.status(200).json(token);
+        return response.status(200).json({token: token});
     }
 }
 

@@ -37,7 +37,7 @@ export default async function ensureAuthenticated(
       String(process.env.SECRETMACAPA),
     ) as ITokenDecodeProps;
 
-    req.client = "MACAPA"
+    req.client = 'MACAPA'
 
     next();
   } catch (err) {
@@ -47,7 +47,7 @@ export default async function ensureAuthenticated(
             String(process.env.SECRETVAREJAO),
         ) as ITokenDecodeProps;
       
-        req.client = "VAREJAO"
+        req.client = 'VAREJAO'
     
         next();
     } catch (err) {  

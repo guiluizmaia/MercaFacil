@@ -12,17 +12,17 @@ class TokenService{
     public async execute({client}: IRequest): Promise<String> {
         let secretKey;
 
-        if (client.toUpperCase() === "MACAPA"){
+        if (client.toUpperCase() === 'MACAPA'){
             secretKey = process.env.SECRETMACAPA;
-        } else if (client.toUpperCase() === "VAREJAO"){
+        } else if (client.toUpperCase() === 'VAREJAO'){
             secretKey = process.env.SECRETVAREJAO;
         } else {
-            throw new AppError("Client not found", 401);
+            throw new AppError('Client not found', 401);
         }
 
         const token = sign({}, String(secretKey), {
             subject: client,
-            expiresIn: "1d",
+            expiresIn: '1d',
         });
 
         return token;

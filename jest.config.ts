@@ -22,7 +22,6 @@ export default {
       '@infra/*': ['/infra/*'],
       '@modules/*': ['/modules/*'],
       '@tests/*': ['/tests/*'],
-      '@configs/*': ['/configs/*'],
     },
     { prefix: '<rootDir>/src' },
   ),

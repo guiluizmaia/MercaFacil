@@ -5,8 +5,7 @@ import v1Routes from '@infra/http/routes/v1';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
 import { getConnectionManager } from 'typeorm';
-
-//const fileContents = fs.readFileSync('swagger.yml', 'utf8');
+import swagger from "../../../documentation/swagger.json";
 const appRoutes = Router();
 
 appRoutes.get('/health-check', async (req, res) => {
@@ -35,13 +34,14 @@ appRoutes.get('/health-check', async (req, res) => {
     });
 });
 
-appRoutes.use(v1Routes);
-
-/*appRoutes.use(
+appRoutes.use(
   '/api-doc/v1',
   swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, { explorer: true }),
-);*/
+  swaggerUi.setup(swagger),
+);
+
+appRoutes.use(v1Routes);
+
 
 appRoutes.all('*/*', (req, res) => {
   return res.status(404).json({

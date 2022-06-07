@@ -9,15 +9,15 @@
       "paths": {
         "@infra/*": ["./src/infra/*"],
         "@modules/*": ["./src/modules/*"],
-        "@tests/*": ["./src/tests/*"],
-        "@configs/*": ["./src/configs/*"]
+        "@tests/*": ["./src/tests/*"]
       },
       "esModuleInterop": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "strictPropertyInitialization": false,
       "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
+      "forceConsistentCasingInFileNames": true,
+      "resolveJsonModule": true
     },
     "exclude": ["jest-setup-file.ts", "jest.config.ts"]
   }

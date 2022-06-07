@@ -1,7 +1,7 @@
-import IContactDto from "@modules/contacts/dtos/IContactDto";
-import IContactsRepository from "@modules/contacts/repositories/IContactRepository"
-import { getRepository, Repository } from "typeorm";
-import Contact from "../entities/Contact";
+import IContactDto from '@modules/contacts/dtos/IContactDto';
+import IContactsRepository from '@modules/contacts/repositories/IContactRepository'
+import { getRepository, Repository } from 'typeorm';
+import Contact from '../entities/Contact';
 
 class ContactRepository implements IContactsRepository{
     private ormRepositoryPostgreSql: Repository<Contact>;
@@ -26,8 +26,8 @@ class ContactRepository implements IContactsRepository{
         })           
 
         return this.ormRepositoryPostgreSql
-            .createQueryBuilder("contact")
-            .where("contact.id IN (:...createdIds)", {createdIds})
+            .createQueryBuilder('contact')
+            .where('contact.id IN (:...createdIds)', {createdIds})
             .getMany()
     }
 
@@ -48,8 +48,8 @@ class ContactRepository implements IContactsRepository{
         })  
 
         return this.ormRepositoryMySql
-            .createQueryBuilder("contact")
-            .where("contact.id IN (:...createdIds)", {createdIds})
+            .createQueryBuilder('contact')
+            .where('contact.id IN (:...createdIds)', {createdIds})
             .getMany();
     }
 

@@ -1,0 +1,65 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test Documentation",
+        "desciption": "this is an API for job testing",
+        "version": "1.0.0",
+        "contact": {
+            "email": "guilhermemaia201450@gmail.com"
+        }
+    },
+    "paths": {
+        "/token": {
+            "get": {
+                "tags": ["Token"],
+                "summary": "Gera um token de cliente informado na query string",
+                "description": "Essa rota é utulizada para testar, gerando um token para a autenticação",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "query",
+                        "description": "Nome do cliente. Só são validos: macapa, e varejão",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/contacts": {
+            "get": {
+                "tags": ["Contacts"],
+                "summary": "Cria contatos",
+                "description": "Cria contatos para o cliente atráves do body e do token",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "contacts": {
+                                       "type": "array",
+                                       "items":{
+                                           "type": "object",
+                                           "properties":{
+                                                "name":{
+                                                    "type":"string"
+                                                },
+                                                "cellphone":{
+                                                    "type":"string"
+                                                }
+                                           }
+                                       }
+
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

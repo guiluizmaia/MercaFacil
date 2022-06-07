@@ -1,6 +1,6 @@
-import IContactDto from "@modules/contacts/dtos/IContactDto";
-import Contact from "@modules/contacts/infra/typeorm/entities/Contact";
-import IContactRepository from "@modules/contacts/repositories/IContactRepository";
+import IContactDto from '@modules/contacts/dtos/IContactDto';
+import Contact from '@modules/contacts/infra/typeorm/entities/Contact';
+import IContactRepository from '@modules/contacts/repositories/IContactRepository';
 
 class ContactRepositoryMock implements IContactRepository{
     private inMemoryVarejao: Contact[] = [];
